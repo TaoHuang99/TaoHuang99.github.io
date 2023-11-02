@@ -1,1 +1,72 @@
-Hello Hola Hi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            margin: 20px auto;
+            transition: transform 0.3s;
+        }
+        .profile-pic:hover {
+            transform: scale(1.1);
+        }
+        .social-icons {
+            margin-top: 20px;
+        }
+        .social-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            margin: 0 10px;
+        }
+        .intro {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="profile-pic" class="profile-pic" style="background-image: url('your-photo-url.jpg');" onmouseover="changeImage()" onmouseout="revertImage()"></div>
+    <div class="social-icons">
+        <!-- 替换以下链接和图片URL -->
+        <a href="your-twitter-profile-url" class="social-icon" style="background-image: url('twitter-icon-url.png');"></a>
+        <a href="your-linkedin-profile-url" class="social-icon" style="background-image: url('linkedin-icon-url.png');"></a>
+        <a href="your-facebook-profile-url" class="social-icon" style="background-image: url('facebook-icon-url.png');"></a>
+        <!-- 添加更多社交媒体图标和链接 -->
+    </div>
+    <div class="intro">
+        <h2>你的名字</h2>
+        <p>这里是你的个人简介。你可以在这里介绍你自己的背景、兴趣、成就等。</p>
+    </div>
+    <script>
+        function changeImage() {
+            document.getElementById('profile-pic').style.backgroundImage = "url('your-github-avatar-url.jpg')";
+        }
+        function revertImage() {
+            document.getElementById('profile-pic').style.backgroundImage = "url('your-photo-url.jpg')";
+        }
+    </script>
+</body>
+</html>
+
