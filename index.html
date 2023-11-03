@@ -44,6 +44,12 @@
             background-color: #fff0;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        img {
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+        }
         .Photograph {
             max-width: 2000px;
             margin: 50px auto;
@@ -53,7 +59,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="initGalleries();">
     <div id="profile-pic" class="profile-pic" style="background-image: url('DSC_1701.JPG');" onmouseover="changeImage()" onmouseout="revertImage()"></div>
     <div class="social-icons">
         <a href="https://github.com/TaoHuang99" class="social-icon" title="Follow me on GitHub" style="background-image: url('DSC_1699.JPG');"></a>
@@ -66,23 +72,23 @@
         <h2>Canyon</h2>
         <p>苦逼求毕业中</p>
     </div>
-        <div class="Photograph">
+        <div class="Photograph" id="gallery-qinghai">
         <h2>青海Photograph</h2>
     </div>
     </div>
-        <div class="Photograph">
+        <div class="Photograph" id="gallery-xian">
         <h2>西安Photograph</h2>
     </div>
     </div>
-        <div class="Photograph">
+        <div class="Photograph" id="gallery-chongqing">
         <h2>重庆Photograph</h2>
     </div>
     </div>
-        <div class="Photograph">
+        <div class="Photograph" id="gallery-hangzhou">
         <h2>杭州Photograph</h2>
     </div>
     </div>
-        <div class="Photograph">
+        <div class="Photograph" id="gallery-xuzhou">
         <h2>徐州Photograph</h2>
     </div>
     <script>
@@ -91,6 +97,36 @@
         }
         function revertImage() {
             document.getElementById('profile-pic').style.backgroundImage = "url('DSC_1715.JPG')";
+        }
+        function showImages(folder, galleryId) {
+            const username = 'TaoHuang99';
+            const repository = 'TaoHuang99.github.io';
+            const path = `images/${folder}/`;
+
+            fetch(`https://api.github.com/repos/${username}/${repository}/contents/${path}`)
+                .then(response => response.json())
+                .then(data => {
+                    const gallery = document.getElementById(galleryId);
+                    gallery.innerHTML = ''; // 清空当前画廊
+                    data.forEach(file => {
+                        if (file.type === 'file') {
+                            const img = document.createElement('img');
+                            img.src = file.download_url;
+                            img.alt = file.name;
+                            img.style.width = '100px'; // 根据需要调整样式
+                            gallery.appendChild(img);
+                        }
+                    });
+                })
+                .catch(error => console.error('Error loading images:', error));
+        }
+
+        function initGalleries() {
+            showImages('qinghai', 'gallery-qinghai');
+            showImages('xian', 'gallery-xian');
+            showImages('chongqing', 'gallery-chongqing');
+            showImages('hangzhou', 'gallery-hangzhou');
+            showImages('xuzhou', 'gallery-xuzhou');
         }
     </script>
 </body>
